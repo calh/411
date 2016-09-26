@@ -10,6 +10,8 @@ if [[ ! -e "/data/data.db" ]]; then
   /var/www/411/bin/create_site.php
   /var/www/411/bin/create_user.php
 fi
-
+if [[ ! -e "/data/config.php" ]]; then
+  cp -a /var/www/411/docker/config.php /data/config.php
+fi
 # Apache needs to run in the foreground for daemon containers
 /usr/sbin/apache2 -DFOREGROUND
