@@ -7,6 +7,7 @@ Welcome to the 411 documentation! These pages are still a WIP. If information on
 Usage
 -----
 
+- [Docker](/docks/Docker.md)
 - [Setup](/docs/Setup.md)
 - [Upgrading](/docs/Upgrading.md)
 - [Getting Started](/docs/GettingStarted.md)
