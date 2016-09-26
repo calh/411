@@ -23,7 +23,7 @@ WORKDIR /var/www/411
 COPY . /var/www/411
 
 # Override apache's default site with 411
-RUN cp -a /var/www/411/411.conf /etc/apache2/sites-available/000-default.conf
+RUN cp -a /var/www/411/docker/411.conf /etc/apache2/sites-available/000-default.conf
 # Enable mod_headers, mod_rewrite
 RUN a2enmod headers rewrite
 
