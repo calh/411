@@ -22,9 +22,8 @@ RUN rm -Rf /var/lib/apt/lists/*
 WORKDIR /var/www/411
 COPY . /var/www/411
 
-RUN cp -a /var/www/411/411.conf /etc/apache2/sites-available/
-# Enable 411.conf site
-RUN a2ensite 411.conf
+# Override apache's default site with 411
+RUN cp -a /var/www/411/411.conf /etc/apache2/sites-available/000-default.conf
 # Enable mod_headers, mod_rewrite
 RUN a2enmod headers rewrite
 
