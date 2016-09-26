@@ -13,7 +13,9 @@ RUN apt-get update && \
       nodejs-legacy \
       npm \
       sqlite3 \
-      git 
+      git \
+      zip \
+      unzip
 
 RUN rm -Rf /var/lib/apt/lists/*
 
@@ -32,6 +34,13 @@ RUN npm install
 RUN bower install --allow-root
 RUN composer install
 RUN grunt prod
+
+# setup the /data directory for easy mounting
+RUN mkdir /data
+
+# Overwrite the config file with our docker version
+COPY docker/config.php /data/config.php
+RUN ln -sf /data/config.php /var/www/411/config.php
 
 COPY docker/startup.sh /startup.sh
 CMD /startup.sh
