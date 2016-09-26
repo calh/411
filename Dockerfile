@@ -17,8 +17,8 @@ RUN apt-get update && \
 
 RUN rm -Rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/etsy/411.git /var/www/411
 WORKDIR /var/www/411
+COPY . /var/www/411
 
 RUN cp -a /var/www/411/411.conf /etc/apache2/sites-available/
 # Enable 411.conf site
