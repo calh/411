@@ -1,0 +1,37 @@
+FROM ubuntu:xenial
+
+# Install packages
+RUN apt-get update && \
+    apt-get install -y \
+      apache2 \
+      libapache2-mod-php \
+      php-xml \
+      php7.0-mbstring \
+      php7.0-sqlite \
+      php7.0-curl \
+      curl \
+      nodejs-legacy \
+      npm \
+      sqlite3 \
+      git 
+
+RUN rm -Rf /var/lib/apt/lists/*
+
+RUN git clone https://github.com/etsy/411.git /var/www/411
+WORKDIR /var/www/411
+
+RUN cp -a /var/www/411/411.conf /etc/apache2/sites-available/
+# Enable 411.conf site
+RUN a2ensite 411.conf
+# Enable mod_headers, mod_rewrite
+RUN a2enmod headers rewrite
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN npm install -g grunt-cli bower
+RUN npm install
+RUN bower install --allow-root
+RUN composer install
+RUN grunt prod
+
+COPY docker/startup.sh /startup.sh
+CMD /startup.sh
