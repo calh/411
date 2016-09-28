@@ -2,6 +2,9 @@
 # Startup wrapper for Docker containers
 source /etc/apache2/envvars
 
+# Copy Docker's $HOSTNAME into $FOURONEONEHOST
+export FOURONEONEHOST=$HOSTNAME
+
 # Check if /data/data.db exists.  If not, run
 # the migration/setup tools
 if [[ ! -e "/data/data.db" ]]; then
